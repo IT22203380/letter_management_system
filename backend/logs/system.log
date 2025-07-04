@@ -490,3 +490,9 @@
 2025-07-04 10:19:54 [INFO]: GET /faxes
 2025-07-04 10:19:55 [INFO]: GET /emails
 2025-07-04 10:19:55 [INFO]: GET /emails
+2025-07-04 10:48:48 [INFO]: Database connection has been established successfully.
+2025-07-04 10:48:51 [INFO]: Server running on port 3000
+2025-07-04 10:48:51 [INFO]: Environment: development
+2025-07-04 10:48:51 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 10:48:51 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\post_management\backend\uploads
+2025-07-04 12:03:00 [INFO]: SIGINT received. Shutting down gracefully...
