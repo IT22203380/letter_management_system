@@ -496,3 +496,38 @@
 2025-07-04 10:48:51 [INFO]: Frontend URL: http://localhost:5173
 2025-07-04 10:48:51 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\post_management\backend\uploads
 2025-07-04 12:03:00 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-04 12:14:54 [INFO]: Database connection has been established successfully.
+2025-07-04 12:14:56 [INFO]: Server running on port 3000
+2025-07-04 12:14:56 [INFO]: Environment: development
+2025-07-04 12:14:56 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 12:14:56 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\post_management\backend\uploads
+2025-07-04 12:15:00 [INFO]: POST /api/users/login
+2025-07-04 12:15:01 [INFO]: GET /letter-stats/counts
+2025-07-04 12:15:01 [INFO]: GET /letter-stats/counts
+2025-07-04 12:16:37 [INFO]: GET /letter-stats/counts
+2025-07-04 12:16:37 [INFO]: GET /letter-stats/counts
+2025-07-04 12:16:51 [INFO]: POST /api/users/login
+2025-07-04 12:16:51 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-04 12:17:30 [INFO]: POST /api/users/login
+2025-07-04 12:17:30 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:30 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:33 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:33 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:36 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:36 [INFO]: GET /letter-stats/counts
+2025-07-04 12:17:38 [INFO]: GET /letter-stats?type=registered
+2025-07-04 12:24:55 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-04 12:24:58 [INFO]: Database connection has been established successfully.
+2025-07-04 12:25:00 [INFO]: Server running on port 3000
+2025-07-04 12:25:00 [INFO]: Environment: development
+2025-07-04 12:25:00 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 12:25:00 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\post_management\backend\uploads
+2025-07-04 12:25:59 [INFO]: POST /api/users/register
+2025-07-04 12:26:00 [ERROR]: Registration error: securityLogger.security is not a function
+2025-07-04 12:26:11 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-04 12:26:14 [INFO]: Database connection has been established successfully.
+2025-07-04 12:26:16 [INFO]: Server running on port 3000
+2025-07-04 12:26:16 [INFO]: Environment: development
+2025-07-04 12:26:16 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 12:26:16 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\post_management\backend\uploads
+2025-07-04 12:33:57 [INFO]: SIGINT received. Shutting down gracefully...
