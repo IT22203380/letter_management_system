@@ -1,0 +1,492 @@
+2025-07-03 23:14:15 [INFO]: Database connection has been established successfully.
+2025-07-03 23:14:17 [INFO]: Server running on port 3000
+2025-07-03 23:14:17 [INFO]: Environment: development
+2025-07-03 23:14:17 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:14:17 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:14:24 [INFO]: POST /auth/login
+2025-07-03 23:14:24 [WARN]: 404 - Route not found: POST /auth/login
+2025-07-03 23:16:33 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:17:34 [INFO]: Database connection has been established successfully.
+2025-07-03 23:17:36 [INFO]: Server running on port 3000
+2025-07-03 23:17:36 [INFO]: Environment: development
+2025-07-03 23:17:36 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:17:36 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:17:39 [INFO]: POST /api/users/login
+2025-07-03 23:17:39 [ERROR]: Login error: Include unexpected. Element has to be either a Model, an Association or an object.
+2025-07-03 23:17:54 [INFO]: POST /api/users/login
+2025-07-03 23:17:54 [ERROR]: Login error: Include unexpected. Element has to be either a Model, an Association or an object.
+2025-07-03 23:21:33 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:21:36 [INFO]: Database connection has been established successfully.
+2025-07-03 23:21:38 [INFO]: Server running on port 3000
+2025-07-03 23:21:38 [INFO]: Environment: development
+2025-07-03 23:21:38 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:21:38 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:21:56 [INFO]: POST /api/users/login
+2025-07-03 23:22:12 [INFO]: POST /api/users/login
+2025-07-03 23:24:11 [INFO]: POST /api/users/login
+2025-07-03 23:24:17 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:24:20 [INFO]: Database connection has been established successfully.
+2025-07-03 23:24:22 [INFO]: Server running on port 3000
+2025-07-03 23:24:22 [INFO]: Environment: development
+2025-07-03 23:24:22 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:24:22 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:24:27 [INFO]: POST /api/users/login
+2025-07-03 23:24:28 [INFO]: POST /api/users/login
+2025-07-03 23:25:43 [INFO]: POST /api/users/login
+2025-07-03 23:33:16 [INFO]: POST /api/users/login
+2025-07-03 23:33:19 [INFO]: POST /api/users/login
+2025-07-03 23:33:24 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:33:27 [INFO]: Database connection has been established successfully.
+2025-07-03 23:33:30 [INFO]: Server running on port 3000
+2025-07-03 23:33:30 [INFO]: Environment: development
+2025-07-03 23:33:30 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:33:30 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:33:47 [INFO]: POST /api/users/login
+2025-07-03 23:33:48 [ERROR]: Login error: createToken.accessToken is not a function
+2025-07-03 23:35:05 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:35:08 [INFO]: Database connection has been established successfully.
+2025-07-03 23:35:14 [INFO]: Server running on port 3000
+2025-07-03 23:35:14 [INFO]: Environment: development
+2025-07-03 23:35:14 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:35:14 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:35:16 [INFO]: POST /api/users/login
+2025-07-03 23:35:17 [ERROR]: Login error: createToken.accessToken is not a function
+2025-07-03 23:38:49 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-03 23:39:44 [INFO]: Database connection has been established successfully.
+2025-07-03 23:39:47 [INFO]: Server running on port 3000
+2025-07-03 23:39:47 [INFO]: Environment: development
+2025-07-03 23:39:47 [INFO]: Frontend URL: http://localhost:5173
+2025-07-03 23:39:47 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast112\letter-management-backend\uploads
+2025-07-03 23:39:51 [INFO]: POST /api/users/login
+2025-07-03 23:39:52 [INFO]: GET /letter-stats/counts
+2025-07-03 23:39:52 [INFO]: GET /letter-stats/counts
+2025-07-03 23:39:54 [INFO]: GET /letter-stats/counts
+2025-07-03 23:39:54 [INFO]: GET /letter-stats/counts
+2025-07-03 23:40:07 [INFO]: POST /api/users/login
+2025-07-03 23:40:07 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-03 23:40:09 [INFO]: POST /api/users/login
+2025-07-03 23:40:09 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-03 23:41:28 [INFO]: POST /api/users/login
+2025-07-03 23:41:28 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-03 23:41:34 [INFO]: POST /api/users/login
+2025-07-03 23:41:35 [INFO]: GET /letter-stats/counts
+2025-07-03 23:41:35 [INFO]: GET /letter-stats/counts
+2025-07-03 23:41:37 [INFO]: GET /letter-stats/counts
+2025-07-03 23:41:37 [INFO]: GET /letter-stats/counts
+2025-07-03 23:41:39 [INFO]: GET /letter-stats?type=normal
+2025-07-03 23:41:44 [INFO]: GET /normal-posts
+2025-07-03 23:41:44 [INFO]: GET /normal-posts
+2025-07-03 23:41:46 [INFO]: GET /registered-posts
+2025-07-03 23:41:46 [INFO]: GET /registered-posts
+2025-07-03 23:41:50 [INFO]: GET /normal-posts
+2025-07-03 23:41:50 [INFO]: GET /normal-posts
+2025-07-03 23:42:01 [INFO]: POST /normal-posts
+2025-07-03 23:42:01 [INFO]: Normal post created with ID: 5
+2025-07-03 23:42:05 [INFO]: GET /registered-posts
+2025-07-03 23:42:05 [INFO]: GET /registered-posts
+2025-07-03 23:42:17 [INFO]: POST /registered-posts
+2025-07-03 23:42:17 [INFO]: Registered post created with ID: 3
+2025-07-03 23:42:18 [INFO]: GET /registered-posts
+2025-07-03 23:42:21 [INFO]: GET /faxes
+2025-07-03 23:42:21 [INFO]: GET /faxes
+2025-07-03 23:42:44 [INFO]: POST /faxes
+2025-07-03 23:42:44 [INFO]: Fax created with ID: 2
+2025-07-03 23:42:49 [INFO]: GET /emails
+2025-07-03 23:42:49 [INFO]: GET /emails
+2025-07-03 23:43:03 [INFO]: POST /emails
+2025-07-03 23:43:03 [INFO]: Email created with ID: 3
+2025-07-03 23:47:14 [INFO]: POST /emails
+2025-07-03 23:47:14 [INFO]: Email created with ID: 4
+2025-07-03 23:47:22 [INFO]: GET /faxes
+2025-07-03 23:47:22 [INFO]: GET /faxes
+2025-07-03 23:47:39 [INFO]: POST /faxes
+2025-07-03 23:47:39 [INFO]: Fax created with ID: 3
+2025-07-03 23:47:43 [INFO]: GET /registered-posts
+2025-07-03 23:47:43 [INFO]: GET /registered-posts
+2025-07-03 23:48:02 [INFO]: POST /registered-posts
+2025-07-03 23:48:02 [INFO]: Registered post created with ID: 4
+2025-07-03 23:48:30 [INFO]: GET /registered-posts
+2025-07-03 23:48:35 [INFO]: GET /normal-posts
+2025-07-03 23:48:35 [INFO]: GET /normal-posts
+2025-07-03 23:48:45 [INFO]: POST /normal-posts
+2025-07-03 23:48:45 [INFO]: Normal post created with ID: 6
+2025-07-03 23:50:51 [INFO]: GET /normal-posts
+2025-07-03 23:51:06 [INFO]: POST /normal-posts
+2025-07-03 23:51:07 [INFO]: Normal post created with ID: 7
+2025-07-03 23:51:57 [INFO]: GET /registered-posts
+2025-07-03 23:51:57 [INFO]: GET /registered-posts
+2025-07-03 23:52:27 [INFO]: POST /registered-posts
+2025-07-03 23:52:27 [INFO]: Registered post created with ID: 5
+2025-07-03 23:52:34 [INFO]: GET /letter-stats/counts
+2025-07-03 23:52:35 [INFO]: GET /letter-stats/counts
+2025-07-03 23:52:36 [INFO]: GET /letter-stats?type=registered
+2025-07-03 23:52:41 [INFO]: DELETE /registered-posts/5
+2025-07-03 23:52:42 [INFO]: Registered post deleted with ID: 5
+2025-07-03 23:52:42 [INFO]: GET /letter-stats/counts
+2025-07-03 23:54:59 [INFO]: GET /registered-posts
+2025-07-03 23:54:59 [INFO]: GET /registered-posts
+2025-07-03 23:55:06 [INFO]: PUT /registered-posts/4
+2025-07-03 23:55:06 [INFO]: Registered post updated with ID: 4
+2025-07-03 23:55:06 [INFO]: PUT /undefineds/undefined
+2025-07-03 23:55:06 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-03 23:55:20 [INFO]: GET /registered-posts
+2025-07-03 23:55:20 [INFO]: GET /registered-posts
+2025-07-03 23:55:30 [INFO]: GET /registered-posts
+2025-07-03 23:55:30 [INFO]: GET /registered-posts
+2025-07-03 23:55:38 [INFO]: PUT /registered-posts/4
+2025-07-03 23:55:38 [INFO]: Registered post updated with ID: 4
+2025-07-03 23:55:38 [INFO]: PUT /undefineds/undefined
+2025-07-03 23:55:38 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-03 23:55:51 [INFO]: GET /registered-posts
+2025-07-03 23:55:51 [INFO]: GET /registered-posts
+2025-07-03 23:55:57 [INFO]: GET /letter-stats?type=fax
+2025-07-03 23:56:00 [INFO]: GET /faxes
+2025-07-03 23:56:00 [INFO]: GET /faxes
+2025-07-03 23:56:05 [INFO]: PUT /faxes/3
+2025-07-03 23:56:05 [INFO]: Fax updated with ID: 3
+2025-07-03 23:56:05 [INFO]: PUT /undefineds/undefined
+2025-07-03 23:56:05 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-03 23:56:28 [INFO]: GET /faxes
+2025-07-03 23:56:28 [INFO]: GET /faxes
+2025-07-03 23:57:25 [INFO]: GET /faxes
+2025-07-03 23:57:25 [INFO]: GET /faxes
+2025-07-03 23:57:27 [INFO]: PUT /faxes/3
+2025-07-03 23:57:27 [INFO]: Fax updated with ID: 3
+2025-07-03 23:57:27 [INFO]: PUT /undefineds/undefined
+2025-07-03 23:57:27 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:00:14 [INFO]: GET /faxes
+2025-07-04 00:00:46 [INFO]: GET /faxes
+2025-07-04 00:00:46 [INFO]: GET /faxes
+2025-07-04 00:00:50 [INFO]: PUT /faxes/3
+2025-07-04 00:00:51 [INFO]: Fax updated with ID: 3
+2025-07-04 00:00:51 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:00:51 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:01:52 [INFO]: GET /letter-stats?type=email
+2025-07-04 00:01:57 [INFO]: GET /emails
+2025-07-04 00:01:57 [INFO]: GET /emails
+2025-07-04 00:02:04 [INFO]: PUT /emails/3
+2025-07-04 00:02:04 [INFO]: Email updated with ID: 3
+2025-07-04 00:02:04 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:02:04 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:02:42 [INFO]: GET /emails
+2025-07-04 00:03:30 [INFO]: GET /emails
+2025-07-04 00:03:44 [INFO]: GET /emails
+2025-07-04 00:03:44 [INFO]: GET /emails
+2025-07-04 00:03:50 [INFO]: PUT /emails/4
+2025-07-04 00:03:50 [INFO]: Email updated with ID: 4
+2025-07-04 00:03:50 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:03:50 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:03:56 [INFO]: GET /emails
+2025-07-04 00:03:56 [INFO]: GET /emails
+2025-07-04 00:03:59 [INFO]: PUT /emails/3
+2025-07-04 00:03:59 [INFO]: Email updated with ID: 3
+2025-07-04 00:03:59 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:03:59 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:04:47 [INFO]: GET /emails
+2025-07-04 00:05:25 [INFO]: GET /letter-stats?type=fax
+2025-07-04 00:05:27 [INFO]: GET /faxes
+2025-07-04 00:05:27 [INFO]: GET /faxes
+2025-07-04 00:05:33 [INFO]: PUT /faxes/2
+2025-07-04 00:05:33 [INFO]: Fax updated with ID: 2
+2025-07-04 00:05:33 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:05:33 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:05:44 [INFO]: GET /faxes
+2025-07-04 00:05:45 [INFO]: PUT /faxes/2
+2025-07-04 00:05:45 [INFO]: Fax updated with ID: 2
+2025-07-04 00:05:46 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:05:46 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:05:51 [INFO]: GET /faxes
+2025-07-04 00:05:51 [INFO]: GET /faxes
+2025-07-04 00:05:57 [INFO]: PUT /faxes/3
+2025-07-04 00:05:57 [INFO]: Fax updated with ID: 3
+2025-07-04 00:05:57 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:05:57 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:07:40 [INFO]: GET /faxes
+2025-07-04 00:07:51 [INFO]: PUT /faxes/3
+2025-07-04 00:07:51 [INFO]: Fax updated with ID: 3
+2025-07-04 00:07:51 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:07:51 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:03 [INFO]: GET /faxes
+2025-07-04 00:08:06 [INFO]: PUT /faxes/3
+2025-07-04 00:08:06 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:06 [INFO]: PUT /faxes/3
+2025-07-04 00:08:06 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:06 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:06 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:06 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:06 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:08 [INFO]: PUT /faxes/3
+2025-07-04 00:08:08 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:08 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:08 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:10 [INFO]: PUT /faxes/3
+2025-07-04 00:08:10 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:10 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:10 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:11 [INFO]: PUT /faxes/3
+2025-07-04 00:08:11 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:11 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:11 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:18 [INFO]: PUT /faxes/3
+2025-07-04 00:08:18 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:18 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:18 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:08:57 [INFO]: PUT /faxes/3
+2025-07-04 00:08:57 [INFO]: Fax updated with ID: 3
+2025-07-04 00:08:57 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:08:57 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:09:19 [INFO]: GET /faxes
+2025-07-04 00:09:26 [INFO]: PUT /faxes/3
+2025-07-04 00:09:26 [INFO]: Fax updated with ID: 3
+2025-07-04 00:09:26 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:09:26 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:09:28 [INFO]: PUT /faxes/3
+2025-07-04 00:09:28 [INFO]: Fax updated with ID: 3
+2025-07-04 00:09:28 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:09:28 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:09:54 [INFO]: GET /faxes
+2025-07-04 00:09:54 [INFO]: GET /faxes
+2025-07-04 00:09:56 [INFO]: PUT /faxes/3
+2025-07-04 00:09:56 [INFO]: Fax updated with ID: 3
+2025-07-04 00:09:57 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:09:57 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:10:06 [INFO]: GET /faxes
+2025-07-04 00:14:44 [INFO]: GET /faxes
+2025-07-04 00:14:50 [INFO]: PUT /faxes/3
+2025-07-04 00:14:50 [INFO]: Fax updated with ID: 3
+2025-07-04 00:14:50 [INFO]: GET /faxes
+2025-07-04 00:14:51 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:14:51 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:14:59 [INFO]: PUT /faxes/3
+2025-07-04 00:14:59 [INFO]: Fax updated with ID: 3
+2025-07-04 00:14:59 [INFO]: GET /faxes
+2025-07-04 00:14:59 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:14:59 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:15:11 [INFO]: GET /faxes
+2025-07-04 00:15:11 [INFO]: GET /faxes
+2025-07-04 00:15:21 [INFO]: GET /normal-posts
+2025-07-04 00:15:21 [INFO]: GET /normal-posts
+2025-07-04 00:15:27 [INFO]: GET /registered-posts
+2025-07-04 00:15:27 [INFO]: GET /registered-posts
+2025-07-04 00:18:31 [INFO]: GET /letter-stats/counts
+2025-07-04 00:18:31 [INFO]: GET /letter-stats/counts
+2025-07-04 00:18:36 [INFO]: GET /letter-stats/counts
+2025-07-04 00:18:36 [INFO]: GET /letter-stats/counts
+2025-07-04 00:20:08 [INFO]: GET /normal-posts
+2025-07-04 00:20:08 [INFO]: GET /normal-posts
+2025-07-04 00:20:09 [INFO]: GET /registered-posts
+2025-07-04 00:20:09 [INFO]: GET /registered-posts
+2025-07-04 00:20:46 [INFO]: POST /registered-posts
+2025-07-04 00:20:46 [INFO]: Registered post created with ID: 6
+2025-07-04 00:21:10 [INFO]: GET /faxes
+2025-07-04 00:21:10 [INFO]: GET /faxes
+2025-07-04 00:21:15 [INFO]: GET /emails
+2025-07-04 00:21:15 [INFO]: GET /emails
+2025-07-04 00:21:20 [INFO]: GET /registered-posts
+2025-07-04 00:21:20 [INFO]: GET /registered-posts
+2025-07-04 00:25:18 [INFO]: GET /letter-stats/counts
+2025-07-04 00:25:18 [INFO]: GET /letter-stats/counts
+2025-07-04 00:25:19 [INFO]: GET /letter-stats?type=registered
+2025-07-04 00:25:44 [INFO]: GET /registered-posts
+2025-07-04 00:25:44 [INFO]: GET /registered-posts
+2025-07-04 00:25:50 [INFO]: PUT /registered-posts/4
+2025-07-04 00:25:50 [INFO]: Registered post updated with ID: 4
+2025-07-04 00:25:50 [INFO]: PUT /undefineds/undefined
+2025-07-04 00:25:50 [WARN]: 404 - Route not found: PUT /undefineds/undefined
+2025-07-04 00:26:20 [INFO]: GET /registered-posts
+2025-07-04 00:26:20 [INFO]: GET /registered-posts
+2025-07-04 00:27:03 [INFO]: DELETE /registered-posts/4
+2025-07-04 00:27:03 [INFO]: Registered post deleted with ID: 4
+2025-07-04 00:27:03 [INFO]: GET /letter-stats/counts
+2025-07-04 00:46:56 [INFO]: GET /letter-stats/counts
+2025-07-04 00:46:56 [INFO]: GET /letter-stats?type=registered
+2025-07-04 00:47:33 [INFO]: GET /normal-posts
+2025-07-04 00:47:33 [INFO]: GET /normal-posts
+2025-07-04 00:47:34 [INFO]: GET /registered-posts
+2025-07-04 00:47:34 [INFO]: GET /registered-posts
+2025-07-04 00:52:00 [INFO]: GET /registered-posts
+2025-07-04 00:52:06 [INFO]: GET /letter-stats/counts
+2025-07-04 00:52:06 [INFO]: GET /letter-stats/counts
+2025-07-04 00:52:08 [INFO]: GET /normal-posts
+2025-07-04 00:52:08 [INFO]: GET /normal-posts
+2025-07-04 00:52:09 [INFO]: GET /registered-posts
+2025-07-04 00:52:09 [INFO]: GET /registered-posts
+2025-07-04 00:52:33 [INFO]: GET /registered-posts
+2025-07-04 00:53:59 [INFO]: GET /registered-posts
+2025-07-04 00:54:11 [INFO]: GET /registered-posts
+2025-07-04 00:54:31 [INFO]: POST /api/users/login
+2025-07-04 00:54:31 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-04 00:54:32 [INFO]: POST /api/users/login
+2025-07-04 00:54:32 [ERROR]: Login error: securityLogger.security is not a function
+2025-07-04 08:16:11 [INFO]: Database connection has been established successfully.
+2025-07-04 08:16:16 [INFO]: Server running on port 3000
+2025-07-04 08:16:16 [INFO]: Environment: development
+2025-07-04 08:16:16 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 08:16:16 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\letter-management-backend\uploads
+2025-07-04 08:18:59 [INFO]: POST /api/users/login
+2025-07-04 08:18:59 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:00 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:03 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:03 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:08 [INFO]: GET /normal-posts
+2025-07-04 08:19:08 [INFO]: GET /normal-posts
+2025-07-04 08:19:09 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:09 [INFO]: GET /letter-stats/counts
+2025-07-04 08:19:09 [INFO]: GET /letter-stats?type=normal
+2025-07-04 08:19:13 [INFO]: GET /normal-posts
+2025-07-04 08:19:14 [INFO]: GET /normal-posts
+2025-07-04 08:19:17 [INFO]: GET /faxes
+2025-07-04 08:19:17 [INFO]: GET /faxes
+2025-07-04 08:19:43 [INFO]: POST /faxes
+2025-07-04 08:19:44 [INFO]: Fax created with ID: 4
+2025-07-04 08:20:15 [INFO]: GET /normal-posts
+2025-07-04 08:20:15 [INFO]: GET /normal-posts
+2025-07-04 08:20:43 [INFO]: POST /normal-posts
+2025-07-04 08:20:44 [INFO]: Normal post created with ID: 8
+2025-07-04 08:33:30 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:31 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:52 [INFO]: POST /api/users/login
+2025-07-04 08:33:52 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:52 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:55 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:55 [INFO]: GET /letter-stats/counts
+2025-07-04 08:33:56 [INFO]: GET /letter-stats?type=normal
+2025-07-04 08:39:29 [INFO]: POST /api/users/login
+2025-07-04 08:39:29 [INFO]: GET /letter-stats/counts
+2025-07-04 08:39:29 [INFO]: GET /letter-stats/counts
+2025-07-04 08:39:32 [INFO]: GET /letter-stats/counts
+2025-07-04 08:39:32 [INFO]: GET /letter-stats/counts
+2025-07-04 08:39:36 [INFO]: GET /normal-posts
+2025-07-04 08:39:36 [INFO]: GET /normal-posts
+2025-07-04 08:41:16 [INFO]: GET /letter-stats/counts
+2025-07-04 08:41:16 [INFO]: GET /letter-stats/counts
+2025-07-04 08:41:17 [INFO]: GET /normal-posts
+2025-07-04 08:41:17 [INFO]: GET /normal-posts
+2025-07-04 08:41:22 [INFO]: GET /registered-posts
+2025-07-04 08:41:22 [INFO]: GET /registered-posts
+2025-07-04 08:41:23 [INFO]: GET /faxes
+2025-07-04 08:41:23 [INFO]: GET /faxes
+2025-07-04 08:41:24 [INFO]: GET /normal-posts
+2025-07-04 08:41:24 [INFO]: GET /normal-posts
+2025-07-04 08:42:41 [INFO]: GET /normal-posts
+2025-07-04 08:42:55 [INFO]: GET /normal-posts
+2025-07-04 08:43:24 [INFO]: GET /normal-posts
+2025-07-04 08:45:32 [INFO]: GET /registered-posts
+2025-07-04 08:45:32 [INFO]: GET /registered-posts
+2025-07-04 08:45:36 [INFO]: GET /faxes
+2025-07-04 08:45:36 [INFO]: GET /faxes
+2025-07-04 08:45:39 [INFO]: GET /emails
+2025-07-04 08:45:39 [INFO]: GET /emails
+2025-07-04 08:46:00 [INFO]: GET /registered-posts
+2025-07-04 08:46:00 [INFO]: GET /registered-posts
+2025-07-04 08:47:51 [INFO]: POST /api/users/login
+2025-07-04 08:47:53 [INFO]: GET /letter-stats/counts
+2025-07-04 08:47:53 [INFO]: GET /letter-stats/counts
+2025-07-04 08:50:46 [INFO]: GET /letter-stats/counts
+2025-07-04 08:50:46 [INFO]: GET /letter-stats/counts
+2025-07-04 08:51:01 [INFO]: GET /normal-posts
+2025-07-04 08:51:01 [INFO]: GET /normal-posts
+2025-07-04 08:51:02 [INFO]: GET /faxes
+2025-07-04 08:51:02 [INFO]: GET /faxes
+2025-07-04 08:51:04 [INFO]: GET /registered-posts
+2025-07-04 08:51:04 [INFO]: GET /registered-posts
+2025-07-04 08:51:28 [INFO]: GET /registered-posts
+2025-07-04 08:52:54 [INFO]: GET /registered-posts
+2025-07-04 08:53:54 [INFO]: GET /registered-posts
+2025-07-04 08:57:19 [INFO]: GET /normal-posts
+2025-07-04 08:57:19 [INFO]: GET /normal-posts
+2025-07-04 08:57:23 [INFO]: GET /faxes
+2025-07-04 08:57:23 [INFO]: GET /faxes
+2025-07-04 08:57:26 [INFO]: GET /emails
+2025-07-04 08:57:26 [INFO]: GET /emails
+2025-07-04 09:51:56 [INFO]: Database connection has been established successfully.
+2025-07-04 09:51:59 [INFO]: Server running on port 3000
+2025-07-04 09:51:59 [INFO]: Environment: development
+2025-07-04 09:51:59 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 09:51:59 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\BACKEND\uploads
+2025-07-04 09:52:29 [INFO]: GET /letter-stats/counts
+2025-07-04 09:52:29 [INFO]: GET /letter-stats/counts
+2025-07-04 09:55:24 [INFO]: GET /normal-posts
+2025-07-04 09:55:24 [INFO]: GET /normal-posts
+2025-07-04 09:57:27 [INFO]: GET /letter-stats/counts
+2025-07-04 09:57:28 [INFO]: GET /letter-stats/counts
+2025-07-04 09:57:29 [INFO]: GET /normal-posts
+2025-07-04 09:57:29 [INFO]: GET /normal-posts
+2025-07-04 09:57:36 [INFO]: GET /registered-posts
+2025-07-04 09:57:36 [INFO]: GET /registered-posts
+2025-07-04 09:57:41 [INFO]: GET /faxes
+2025-07-04 09:57:41 [INFO]: GET /faxes
+2025-07-04 10:00:03 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:03 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:16 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-04 10:00:20 [INFO]: Database connection has been established successfully.
+2025-07-04 10:00:23 [INFO]: Server running on port 3000
+2025-07-04 10:00:23 [INFO]: Environment: development
+2025-07-04 10:00:23 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 10:00:23 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\BACKEND\uploads
+2025-07-04 10:00:27 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:27 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:29 [INFO]: GET /normal-posts
+2025-07-04 10:00:29 [INFO]: GET /normal-posts
+2025-07-04 10:00:32 [INFO]: GET /registered-posts
+2025-07-04 10:00:32 [INFO]: GET /registered-posts
+2025-07-04 10:00:38 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:38 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:48 [INFO]: GET /letter-stats/counts
+2025-07-04 10:00:48 [INFO]: GET /letter-stats/counts
+2025-07-04 10:05:28 [INFO]: GET /letter-stats?type=normal
+2025-07-04 10:05:32 [INFO]: GET /letter-stats?type=registered
+2025-07-04 10:05:37 [INFO]: SIGINT received. Shutting down gracefully...
+2025-07-04 10:06:52 [INFO]: Database connection has been established successfully.
+2025-07-04 10:06:54 [INFO]: Server running on port 3000
+2025-07-04 10:06:54 [INFO]: Environment: development
+2025-07-04 10:06:54 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 10:06:54 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\BACKEND\uploads
+2025-07-04 10:07:08 [INFO]: GET /letter-stats/counts
+2025-07-04 10:07:08 [INFO]: GET /letter-stats/counts
+2025-07-04 10:07:11 [INFO]: GET /letter-stats?type=normal
+2025-07-04 10:08:50 [INFO]: GET /letter-stats/counts
+2025-07-04 10:08:50 [INFO]: GET /letter-stats/counts
+2025-07-04 10:08:53 [INFO]: GET /letter-stats?type=normal
+2025-07-04 10:09:14 [INFO]: GET /letter-stats/counts
+2025-07-04 10:09:14 [INFO]: GET /letter-stats/counts
+2025-07-04 10:12:20 [INFO]: Database connection has been established successfully.
+2025-07-04 10:12:22 [INFO]: Server running on port 3000
+2025-07-04 10:12:22 [INFO]: Environment: development
+2025-07-04 10:12:22 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 10:12:22 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\BACKEND\uploads
+2025-07-04 10:12:51 [INFO]: GET /letter-stats/counts
+2025-07-04 10:12:51 [INFO]: GET /letter-stats/counts
+2025-07-04 10:18:26 [INFO]: Database connection has been established successfully.
+2025-07-04 10:18:28 [INFO]: Server running on port 3000
+2025-07-04 10:18:28 [INFO]: Environment: development
+2025-07-04 10:18:28 [INFO]: Frontend URL: http://localhost:5173
+2025-07-04 10:18:28 [INFO]: Upload directory: C:\Users\Jesu Aron\Desktop\finallylast1123\BACKEND\uploads
+2025-07-04 10:18:37 [INFO]: GET /letter-stats/counts
+2025-07-04 10:18:37 [INFO]: GET /letter-stats/counts
+2025-07-04 10:18:40 [INFO]: GET /normal-posts
+2025-07-04 10:18:40 [INFO]: GET /normal-posts
+2025-07-04 10:18:44 [INFO]: GET /registered-posts
+2025-07-04 10:18:44 [INFO]: GET /registered-posts
+2025-07-04 10:18:57 [INFO]: POST /registered-posts
+2025-07-04 10:18:57 [INFO]: Registered post created with ID: 7
+2025-07-04 10:19:00 [INFO]: GET /normal-posts
+2025-07-04 10:19:00 [INFO]: GET /normal-posts
+2025-07-04 10:19:11 [INFO]: POST /normal-posts
+2025-07-04 10:19:11 [INFO]: Normal post created with ID: 9
+2025-07-04 10:19:13 [INFO]: GET /faxes
+2025-07-04 10:19:14 [INFO]: GET /faxes
+2025-07-04 10:19:25 [INFO]: POST /faxes
+2025-07-04 10:19:25 [INFO]: Fax created with ID: 5
+2025-07-04 10:19:33 [INFO]: GET /registered-posts
+2025-07-04 10:19:33 [INFO]: GET /registered-posts
+2025-07-04 10:19:34 [INFO]: GET /faxes
+2025-07-04 10:19:34 [INFO]: GET /faxes
+2025-07-04 10:19:37 [INFO]: GET /emails
+2025-07-04 10:19:37 [INFO]: GET /emails
+2025-07-04 10:19:50 [INFO]: POST /emails
+2025-07-04 10:19:50 [INFO]: Email created with ID: 5
+2025-07-04 10:19:54 [INFO]: GET /faxes
+2025-07-04 10:19:54 [INFO]: GET /faxes
+2025-07-04 10:19:55 [INFO]: GET /emails
+2025-07-04 10:19:55 [INFO]: GET /emails

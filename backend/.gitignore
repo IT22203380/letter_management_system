@@ -1,0 +1,7 @@
+#Files
+package-lock.json
+
+#Foders
+node_modules/
+dist/
+uploads/
