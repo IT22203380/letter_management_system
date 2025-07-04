@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 // API Routes
-app.use('/api/users', userRoutes);
+app.use('/users', userRoutes);
 app.use('/letters', letterRoutes);
 app.use('/faxes', faxRoutes);
 app.use('/emails', emailRoutes);
@@ -50,7 +50,7 @@ app.use('/registered-posts', registeredPostRoutes);
 app.use('/letter-stats', letterRoutes);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.status(200).json({ 
     status: 'ok', 
     timestamp: new Date().toISOString(),

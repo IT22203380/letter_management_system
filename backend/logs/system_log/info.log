@@ -1136,3 +1136,25 @@
 {"level":"info","message":"POST /auth/login","timestamp":"7/3/2025, 11:11:09 PM"}
 {"level":"info","message":"POST /auth/login","timestamp":"7/3/2025, 11:11:18 PM"}
 {"level":"info","message":"SIGINT received. Shutting down gracefully...","timestamp":"7/3/2025, 11:14:13 PM"}
+{"level":"info","message":"Database connection has been established successfully.","timestamp":"7/4/2025, 12:34:00 PM"}
+{"level":"info","message":"Server running on port 3000","timestamp":"7/4/2025, 12:34:02 PM"}
+{"level":"info","message":"Environment: development","timestamp":"7/4/2025, 12:34:02 PM"}
+{"level":"info","message":"Frontend URL: http://localhost:5173","timestamp":"7/4/2025, 12:34:02 PM"}
+{"level":"info","message":"Upload directory: C:\\Users\\Jesu Aron\\Desktop\\post_management\\backend\\uploads","timestamp":"7/4/2025, 12:34:02 PM"}
+{"level":"info","message":"POST /api/users/register","timestamp":"7/4/2025, 12:34:11 PM"}
+{"level":"info","message":"POST /api/users/register","timestamp":"7/4/2025, 12:34:27 PM"}
+{"level":"info","message":"POST /api/users/register","timestamp":"7/4/2025, 12:34:38 PM"}
+{"level":"info","message":"POST /api/users/login","timestamp":"7/4/2025, 12:38:05 PM"}
+{"level":"info","message":"GET /letter-stats/counts","timestamp":"7/4/2025, 12:38:05 PM"}
+{"level":"info","message":"GET /letter-stats/counts","timestamp":"7/4/2025, 12:38:05 PM"}
+{"level":"info","message":"GET /letter-stats/counts","timestamp":"7/4/2025, 12:38:08 PM"}
+{"level":"info","message":"GET /letter-stats/counts","timestamp":"7/4/2025, 12:38:08 PM"}
+{"level":"info","message":"SIGINT received. Shutting down gracefully...","timestamp":"7/4/2025, 1:05:08 PM"}
+{"level":"info","message":"Database connection has been established successfully.","timestamp":"7/4/2025, 1:05:12 PM"}
+{"level":"info","message":"Server running on port 3000","timestamp":"7/4/2025, 1:05:14 PM"}
+{"level":"info","message":"Environment: development","timestamp":"7/4/2025, 1:05:14 PM"}
+{"level":"info","message":"Frontend URL: http://localhost:5173","timestamp":"7/4/2025, 1:05:14 PM"}
+{"level":"info","message":"Upload directory: C:\\Users\\Jesu Aron\\Desktop\\post_management\\backend\\uploads","timestamp":"7/4/2025, 1:05:14 PM"}
+{"level":"info","message":"POST /users/register","timestamp":"7/4/2025, 1:05:35 PM"}
+{"level":"info","message":"POST /api/users/register","timestamp":"7/4/2025, 1:06:01 PM"}
+{"level":"info","message":"SIGINT received. Shutting down gracefully...","timestamp":"7/4/2025, 1:06:59 PM"}
