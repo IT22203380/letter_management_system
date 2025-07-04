@@ -2,7 +2,8 @@
 package-lock.json
 
 #Foders
-node_modules/
-uploads/
+node_modules
+uploads
+logs
 
 #Some comments
