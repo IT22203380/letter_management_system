@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
-import {  FaFilePdf, FaFileImage, FaFileAlt, FaTimes } from 'react-icons/fa';
-import { FiUpload, FiSend} from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { FaFilePdf, FaFileImage, FaFileAlt, FaTimes, FaFileWord } from 'react-icons/fa';
+import { FiUpload, FiSend, FiDownload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 
 interface UploadedFile {
@@ -12,6 +12,7 @@ interface UploadedFile {
   name: string;
   type: string;
   size: number;
+  url?: string;
 }
 
 interface NormalPostEntry {
@@ -34,7 +35,6 @@ interface NormalPostEntry {
 interface NormalPostFormProps {
   initialData?: NormalPostEntry;
   onSubmit: (data: NormalPostEntry) => void;
-  onCancel: () => void;
 }
 
 const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }) => {
@@ -50,7 +50,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
     mode: initialData?.mode || 'By hand',
     status: initialData?.status || 'pending',
     priority: initialData?.priority || 'medium',
-    type: 'normal'
+    type: 'normal' as const
   });
 
   const [attachments, setAttachments] = useState<UploadedFile[]>(initialData?.attachments || []);
@@ -63,8 +63,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [entriesPerPage] = useState(5);
-
+  const entriesPerPage = 5;
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
   const currentEntries = recentEntries.slice(indexOfFirstEntry, indexOfLastEntry);
@@ -78,14 +77,12 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
     const fetchRecentPosts = async () => {
       try {
         const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/normal-posts`);
-        // Ensure we always set an array, even if response.data is undefined
         const data = Array.isArray(response.data) ? response.data : 
                    (Array.isArray(response.data?.data) ? response.data.data : []);
         setRecentEntries(data);
       } catch (err) {
         setError('Failed to load recent normal posts');
         console.error('Error fetching recent posts:', err);
-        // Ensure we set an empty array on error
         setRecentEntries([]);
       } finally {
         setIsLoading(false);
@@ -137,7 +134,6 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
     try {
       const formDataToSend = new FormData();
       
-      // Append form fields
       formDataToSend.append('senderName', formData.senderName);
       formDataToSend.append('senderAddress', formData.senderAddress);
       formDataToSend.append('receiverName', formData.receiverName);
@@ -150,7 +146,6 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
       formDataToSend.append('priority', formData.priority);
       formDataToSend.append('type', 'normal');
       
-      // Append files
       if (attachments.length > 0) {
         attachments.forEach((fileObj) => {
           formDataToSend.append('attachments', fileObj.file);
@@ -163,13 +158,10 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
         },
       });
 
-      // Add new entry to recent entries
       setRecentEntries(prev => [response.data, ...prev]);
 
-      // Call parent's onSubmit with the response data
       onSubmit(response.data);
 
-      // Reset form
       setFormData({
         senderName: '',
         senderAddress: '',
@@ -216,7 +208,6 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
   };
 
   const getStatusBadgeClass = (status: string) => {
-    // Ensure status is a string and convert to lowercase
     const statusStr = String(status || '').toLowerCase();
     
     switch (statusStr) {
@@ -236,10 +227,14 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Sender Information */}
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Sender Information</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            {t('normalPost.senderInfo')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sender Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('normalPost.senderName')}
+              </label>
               <input
                 type="text"
                 name="senderName"
@@ -250,7 +245,9 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Sender Address</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('normalPost.senderAddress')}
+              </label>
               <textarea
                 name="senderAddress"
                 value={formData.senderAddress}
@@ -265,10 +262,14 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
 
         {/* Receiver Information */}
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Receiver Information</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            {t('normalPost.receiverInfo')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Receiver Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('normalPost.receiverName')}
+              </label>
               <input
                 type="text"
                 name="receiverName"
@@ -279,7 +280,9 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Receiver Address</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('normalPost.receiverAddress')}
+              </label>
               <textarea
                 name="receiverAddress"
                 value={formData.receiverAddress}
@@ -292,7 +295,9 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('common.date')}
+              </label>
               <input
                 type="date"
                 name="date"
@@ -303,7 +308,9 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('common.time')}
+              </label>
               <input
                 type="time"
                 name="time"
@@ -318,10 +325,14 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
 
         {/* Additional Information */}
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Additional Information</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            {t('normalPost.additionalInfo')}
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Is Confidential</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t('normalPost.isConfidential')}
+              </label>
               <div className="flex space-x-4">
                 <label className="flex items-center">
                   <input
@@ -332,7 +343,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                     onChange={handleChange}
                     className="mr-2"
                   />
-                  Yes
+                  {t('common.yes')}
                 </label>
                 <label className="flex items-center">
                   <input
@@ -343,12 +354,14 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                     onChange={handleChange}
                     className="mr-2"
                   />
-                  No
+                  {t('common.no')}
                 </label>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Mode</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t('normalPost.mode')}
+              </label>
               <div className="flex space-x-4">
                 <label className="flex items-center">
                   <input
@@ -359,7 +372,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                     onChange={handleChange}
                     className="mr-2"
                   />
-                  By hand
+                  {t('normalPost.byHand')}
                 </label>
                 <label className="flex items-center">
                   <input
@@ -370,21 +383,23 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                     onChange={handleChange}
                     className="mr-2"
                   />
-                  Postal
+                  {t('normalPost.postal')}
                 </label>
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                {t('common.priority')}
+              </label>
               <select
                 name="priority"
                 value={formData.priority}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
+                <option value="low">{t('common.low')}</option>
+                <option value="medium">{t('common.medium')}</option>
+                <option value="high">{t('common.high')}</option>
               </select>
             </div>
           </div>
@@ -392,11 +407,13 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
 
         {/* File Upload Section */}
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Attachment</h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-4">
+            {t('normalPost.attachment')}
+          </h3>
           <div className="flex space-x-4">
             <label className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
               <FiUpload className="mr-2" />
-              Upload File
+              {t('normalPost.uploadFile')}
               <input 
                 type="file" 
                 multiple 
@@ -406,20 +423,14 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                 accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx,.txt,.xlsx,.xls"
               />
             </label>
-            {/* <button
-              type="button"
-              className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-              onClick={() => alert('Scan functionality will be implemented here')}
-            >
-              <FaBarcode className="mr-2" />
-              Scan Document
-            </button> */}
           </div>
 
           {/* Uploaded Files List */}
           {attachments.length > 0 && (
             <div className="mt-4">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">Attached Files</h4>
+              <h4 className="text-sm font-medium text-gray-700 mb-2">
+                {t('normalPost.attachedFiles')}
+              </h4>
               <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                 {attachments.map((file) => (
                   <li key={file.id} className="pl-3 pr-4 py-3 group hover:bg-gray-50 rounded-md">
@@ -444,7 +455,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                             handleRemoveFile(file.id);
                           }}
                           className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
-                          title="Remove"
+                          title={t('common.remove')}
                         >
                           <FaTimes className="h-4 w-4" />
                         </button>
@@ -465,21 +476,23 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
             disabled={isSubmitting}
           >
             {isSubmitting ? (
-              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
             ) : (
               <FiSend className="mr-2" />
             )}
-            Submit
+            {t('common.submit')}
           </button>
         </div>
       </form>
 
       {/* Recent Entries Table */}
       <div className="mt-12">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Normal Posts</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          {t('normalPost.recentNormalPosts')}
+        </h3>
 
         {isLoading ? (
           <div className="flex justify-center items-center p-8">
@@ -504,8 +517,12 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
               <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No recent entries</h3>
-              <p className="mt-1 text-sm text-gray-500">Get started by creating a new normal post.</p>
+              <h3 className="mt-2 text-sm font-medium text-gray-900">
+                {t('normalPost.noEntries')}
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                {t('normalPost.getStarted')}
+              </p>
             </div>
           </div>
         ) : (
@@ -515,16 +532,19 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                 <thead className="bg-gray-50">
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date & Time
+                      {t('normalPost.dateTime')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Sender → Receiver
+                      {t('normalPost.senderToReceiver')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Mode
+                      {t('normalPost.mode')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                      {t('common.status')}
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('normalPost.attachments')}
                     </th>
                   </tr>
                 </thead>
@@ -546,26 +566,84 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900">{entry.senderName}</div>
-                        <div className="flex items-center text-xs text-gray-500">
-                          <svg className="h-3 w-3 text-gray-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <div className="flex items-center">
+                          <div className="text-sm font-medium text-gray-900 truncate max-w-[150px]" title={entry.senderName}>
+                            {entry.senderName}
+                          </div>
+                          <svg className="h-4 w-4 mx-2 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                           </svg>
-                          {entry.receiverName}
+                          <div className="text-sm font-medium text-gray-900 truncate max-w-[150px]" title={entry.receiverName}>
+                            {entry.receiverName}
+                          </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${
                           entry.mode === 'By hand' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800' }`}>
-                          {entry.mode}
+                          {entry.mode === 'By hand' ? t('normalPost.byHand') : t('normalPost.postal')}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClass(entry.status)}`}>
-                          {entry.status || 'Pending'}
+                          {entry.status || t('common.pending')}
                         </span>
                         {entry.isConfidential === 'Yes' && (
-                          <span className="ml-1 px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Confidential</span>)}
+                          <span className="ml-1 px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                            {t('normalPost.confidential')}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {entry.attachments && entry.attachments.length > 0 ? (
+                          <div className="flex flex-wrap gap-1">
+                            {entry.attachments.map((file, index) => {
+                              if (!file) return null;
+                              
+                              const fileExt = file.name ? file.name.split('.').pop()?.toLowerCase() || '' : '';
+                              const fileUrl = file.url || file.previewUrl || '';
+                              const fileName = file.name || t('normalPost.unnamedFile');
+                              
+                              return (
+                                <a 
+                                  key={index}
+                                  href={fileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (file.previewUrl || file.url) {
+                                      setPreviewFile(file);
+                                      setShowPreview(true);
+                                    }
+                                  }}
+                                  title={`${t('normalPost.clickToView')} ${fileName}`}
+                                >
+                                  {file.type?.startsWith('image/') ? (
+                                    <FaFileImage className="h-3 w-3 mr-1 text-blue-500" />
+                                  ) : file.type === 'application/pdf' || fileExt === 'pdf' ? (
+                                    <FaFilePdf className="h-3 w-3 mr-1 text-red-500" />
+                                  ) : file.type?.startsWith('text/') || 
+                                    file.type?.includes('document') || 
+                                    ['doc', 'docx', 'txt'].includes(fileExt) ? (
+                                    <FaFileWord className="h-3 w-3 mr-1 text-blue-600" />
+                                  ) : (
+                                    <FaFileAlt className="h-3 w-3 mr-1 text-gray-500" />
+                                  )}
+                                  <span className="truncate max-w-xs">
+                                    {fileName.length > 15 ? `${fileName.substring(0, 12)}...` : fileName}
+                                  </span>
+                                </a>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-400">
+                            {t('normalPost.noAttachments')}
+                          </span>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -581,19 +659,19 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                     onClick={prevPage}
                     disabled={currentPage === 1}
                     className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
-                      currentPage === 1? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'
+                      currentPage === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    Previous
+                    {t('common.previous')}
                   </button>
                   <button
                     onClick={nextPage}
                     disabled={currentPage === totalPages}
                     className={`ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
-                      currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed': 'bg-white text-gray-700 hover:bg-gray-50'
+                      currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
-                    Next
+                    {t('common.next')}
                   </button>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-end">
@@ -602,10 +680,10 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                       onClick={prevPage}
                       disabled={currentPage === 1}
                       className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium ${
-                        currentPage === 1  ? 'text-gray-300 cursor-not-allowed'  : 'text-gray-500 hover:bg-gray-50'
+                        currentPage === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
                       }`}
                     >
-                      <span className="sr-only">Previous</span>
+                      <span className="sr-only">{t('common.previous')}</span>
                       <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
@@ -615,7 +693,7 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                         key={number}
                         onClick={() => paginate(number)}
                         className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                          currentPage === number? 'z-10 bg-blue-50 border-blue-500 text-blue-600': 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                          currentPage === number ? 'z-10 bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                         }`}
                       >
                         {number}
@@ -625,10 +703,10 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
                       onClick={nextPage}
                       disabled={currentPage === totalPages}
                       className={`relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium ${
-                        currentPage === totalPages ? 'text-gray-300 cursor-not-allowed': 'text-gray-500 hover:bg-gray-50'
+                        currentPage === totalPages ? 'text-gray-300 cursor-not-allowed' : 'text-gray-500 hover:bg-gray-50'
                       }`}
                     >
-                      <span className="sr-only">Next</span>
+                      <span className="sr-only">{t('common.next')}</span>
                       <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                       </svg>
@@ -643,53 +721,81 @@ const NormalPostForm: React.FC<NormalPostFormProps> = ({ initialData, onSubmit }
 
       {/* File Preview Modal */}
       {showPreview && previewFile && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b">
-              <h3 className="text-lg font-medium text-gray-900">{t('preview')}: {previewFile.name}</h3>
-              <button
-                onClick={() => setShowPreview(false)}
-                className="text-gray-400 hover:text-gray-500"
-              >
-                <FaTimes className="h-5 w-5" />
-              </button>
-            </div>
-            <div className="p-4 overflow-auto flex-1">
-              {previewFile.type.startsWith('image/') ? (
-                <img
-                  src={previewFile.previewUrl}
-                  alt={previewFile.name}
-                  className="max-w-full max-h-[70vh] mx-auto"
-                />
-              ) : previewFile.type === 'application/pdf' ? (
-                <iframe
-                  src={previewFile.previewUrl}
-                  className="w-full h-[70vh]"
-                  title={previewFile.name}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center h-full text-gray-500">
-                  <FaFileAlt className="h-16 w-16 mb-4" />
-                  <p>{t('previewNotAvailable')}</p>
-                  <p className="text-sm mt-2">{t('fileType')}: {previewFile.type}</p>
+        <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onClick={() => setShowPreview(false)}></div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                        {previewFile.name || t('normalPost.filePreview')}
+                      </h3>
+                      <button
+                        type="button"
+                        className="text-gray-400 hover:text-gray-500"
+                        onClick={() => setShowPreview(false)}
+                      >
+                        <FaTimes className="h-6 w-6" />
+                      </button>
+                    </div>
+                    <div className="mt-4 max-h-[70vh] overflow-auto">
+                      {previewFile.type?.startsWith('image/') ? (
+                        <img 
+                          src={previewFile.previewUrl || previewFile.url} 
+                          alt={previewFile.name || t('normalPost.preview')} 
+                          className="max-w-full h-auto mx-auto"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/placeholder-image.png';
+                          }}
+                        />
+                      ) : previewFile.type === 'application/pdf' || (previewFile.name?.toLowerCase().endsWith('.pdf')) ? (
+                        <iframe 
+                          src={`${previewFile.previewUrl || previewFile.url}#view=fitH`} 
+                          className="w-full h-[70vh] border-0"
+                          title={previewFile.name || t('normalPost.pdfPreview')}
+                        />
+                      ) : (
+                        <div className="flex flex-col items-center justify-center p-8">
+                          <FaFileAlt className="h-16 w-16 text-gray-400 mb-4" />
+                          <p className="text-gray-600 mb-4">
+                            {t('normalPost.previewNotAvailable')}
+                          </p>
+                          <a
+                            href={previewFile.previewUrl || previewFile.url}
+                            download={previewFile.name}
+                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <FiDownload className="mr-2 h-4 w-4" />
+                            {t('common.downloadFile')}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              )}
-            </div>
-            <div className="p-4 border-t flex justify-end space-x-3">
-              <button
-                type="button"
-                onClick={() => setShowPreview(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-              >
-                {t('close')}
-              </button>
-              <a
-                href={previewFile.previewUrl}
-                download={previewFile.name}
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-              >
-                {t('download')}
-              </a>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <a
+                  href={previewFile.previewUrl || previewFile.url}
+                  download={previewFile.name}
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FiDownload className="mr-2 h-4 w-4" />
+                  {t('common.download')}
+                </a>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => setShowPreview(false)}
+                >
+                  {t('common.close')}
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {FaFilePdf, FaFileImage, FaFileAlt, FaTimes } from 'react-icons/fa';
+import { FaFilePdf, FaFileImage, FaFileAlt, FaTimes } from 'react-icons/fa';
 import { FiUpload, FiEye, FiSend } from 'react-icons/fi';
-import { updateLetter, createFax } from '../../../services/letterService';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +12,7 @@ interface UploadedFile {
   name: string;
   type: string;
   size: number;
+  url?: string;
 }
 
 export interface FaxFormData {
@@ -29,6 +29,8 @@ export interface FaxFormData {
   priority?: string;
   type?: string;
   attachments?: UploadedFile[];
+  isConfidential?: string;
+  mode?: string;
 }
 
 interface FaxFormProps {
@@ -51,6 +53,7 @@ interface FaxEntry {
   priority: string;
   type: string;
   createdAt: string;
+  attachments?: UploadedFile[];
 }
 
 const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) => {
@@ -68,21 +71,18 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
     priority: 'medium',
     type: 'fax',
     attachments: [],
+    isConfidential: 'No',
+    mode: 'By hand',
     ...initialData
   }));
 
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewFile, setPreviewFile] = useState<UploadedFile | null>(null);
-  const [showPreview, setShowPreview] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [recentEntries, setRecentEntries] = useState<FaxEntry[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage] = useState(5);
   
-  // Pagination logic
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
   const currentEntries = recentEntries.slice(indexOfFirstEntry, indexOfLastEntry);
@@ -147,35 +147,9 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const handleRemoveFile = (id: string) => {
-    setFormData(prev => ({
-      ...prev,
-      attachments: prev.attachments?.filter(file => {
-        const shouldKeep = file.id !== id;
-        if (!shouldKeep) {
-          URL.revokeObjectURL(file.previewUrl);
-        }
-        return shouldKeep;
-      })
-    }));
-  };
-
-  const handlePreviewFile = (file: UploadedFile) => {
-    setPreviewFile(file);
-    setShowPreview(true);
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setIsLoading(true);
     
     try {
       // Create FormData for file upload
@@ -192,6 +166,9 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
       formDataToSend.append('time', formData.time);
       formDataToSend.append('status', formData.status || 'pending');
       formDataToSend.append('type', 'fax');
+      formDataToSend.append('isConfidential', formData.isConfidential);
+      formDataToSend.append('mode', formData.mode);
+      formDataToSend.append('priority', formData.priority);
       
       // Append files
       if (formData.attachments && formData.attachments.length > 0) {
@@ -236,6 +213,8 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
           priority: 'medium',
           type: 'fax',
           attachments: [],
+          isConfidential: 'No',
+          mode: 'By hand',
         });
       }
       
@@ -248,7 +227,7 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
       }
       toast.error(errorMessage);
     } finally {
-      setIsSubmitting(false);
+      setIsLoading(false);
     }
   };
 
@@ -272,15 +251,6 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
         return 'bg-yellow-100 text-yellow-800';
     }
   };
-
-  // Clean up object URLs
-  useEffect(() => {
-    return () => {
-      formData.attachments?.forEach(file => {
-        URL.revokeObjectURL(file.previewUrl);
-      });
-    };
-  }, [formData.attachments]);
 
   return (
     <>
@@ -377,10 +347,89 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows={4}
+              rows={6}
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               required
             />
+          </div>
+
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Additional Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('common.isConfidential')}
+  </label>
+                <div className="flex space-x-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="isConfidential"
+                      value="Yes"
+                      checked={formData.isConfidential === 'yes'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.yes')}
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="isConfidential"
+                      value="No"
+                      checked={formData.isConfidential !== 'no'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.no')}
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('common.mode')}
+                </label>
+                <div className="flex space-x-4">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="mode"
+                      value="By hand"
+                      checked={formData.mode === 'byHand'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.byHand')}
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="mode"
+                      value="postal"
+                      checked={formData.mode === 'postal'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.postal')}
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    {t('common.priority')}
+                </label>
+                <select
+                  name="priority"
+                  value={formData.priority}
+                  onChange={handleChange}
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                >
+                  <option value="low">{t('common.low')}</option>
+                  <option value="medium">{t('common.medium')}</option>
+                  <option value="high">{t('common.high')}</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div>
@@ -398,15 +447,6 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
       />
     </label>
   </div>
-              {/* <button
-                type="button"
-                className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
-                onClick={() => alert('Scan functionality will be implemented here')}
-              >
-                <FaBarcode className="mr-2" />
-                {t('faxForm.scanDocument')}
-              </button>
-            </div> */}
 
             {formData.attachments && formData.attachments.length > 0 && (
               <div className="mt-4">
@@ -423,19 +463,19 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
                           <FaFileAlt className="text-gray-500 mr-2" />
                         )}
                         <span className="text-sm">{file.name}</span>
-                        <span className="text-xs text-gray-500 ml-2">({formatFileSize(file.size)})</span>
+                        <span className="text-xs text-gray-500 ml-2">({file.size} bytes)</span>
                       </div>
                       <div className="flex space-x-2">
                         <button
                           type="button"
-                          onClick={() => handlePreviewFile(file)}
+                          onClick={() => console.log('Preview file')}
                           className="text-blue-500 hover:text-blue-700"
                         >
                           <FiEye />
                         </button>
                         <button
                           type="button"
-                          onClick={() => handleRemoveFile(file.id)}
+                          onClick={() => console.log('Remove file')}
                           className="text-red-500 hover:text-red-700"
                         >
                           <FaTimes />
@@ -546,6 +586,9 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
                       {t('faxForm.subject')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('faxForm.attachments')}
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {t('faxForm.status')}
                     </th>
                   </tr>
@@ -572,6 +615,47 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
                         <div className="text-sm text-gray-900 max-w-xs truncate">
                           {entry.subject || 'No subject'}
                         </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {entry.attachments?.length > 0 ? (
+                          <div className="flex flex-wrap gap-1">
+                            {entry.attachments.map((file, index) => {
+                              if (!file) return null;
+                              
+                              const fileExt = file.name?.split('.').pop()?.toLowerCase() || '';
+                              const fileUrl = file.url || '';
+                              const fileName = file.name || 'Unnamed file';
+                              
+                              return (
+                                <a 
+                                  key={index}
+                                  href={fileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                  title={`Click to view ${fileName}`}
+                                >
+                                  {file.type?.startsWith('image/') ? (
+                                    <FaFileImage className="h-3 w-3 mr-1 text-blue-500" />
+                                  ) : file.type === 'application/pdf' || fileExt === 'pdf' ? (
+                                    <FaFilePdf className="h-3 w-3 mr-1 text-red-500" />
+                                  ) : file.type?.startsWith('text/') || 
+                                    file.type?.includes('document') || 
+                                    ['doc', 'docx', 'txt'].includes(fileExt) ? (
+                                    <FaFileAlt className="h-3 w-3 mr-1 text-blue-600" />
+                                  ) : (
+                                    <FaFileAlt className="h-3 w-3 mr-1 text-gray-500" />
+                                  )}
+                                  <span className="truncate max-w-xs">
+                                    {fileName.length > 15 ? `${fileName.substring(0, 12)}...` : fileName}
+                                  </span>
+                                </a>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-400">No attachments</span>
+                        )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusBadgeClass(entry.status)}`}>
@@ -640,43 +724,6 @@ const FaxForm: React.FC<FaxFormProps> = ({ initialData, onSubmit, onCancel }) =>
           </div>
         )}
       </div>
-
-      {/* File Preview Modal */}
-      {previewFile && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white p-4 rounded-lg max-w-4xl max-h-[90vh] overflow-auto">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-medium">Preview: {previewFile.name}</h3>
-              <button
-                onClick={() => setPreviewFile(null)}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <FaTimes className="h-5 w-5" />
-              </button>
-            </div>
-            {previewFile.type.includes('image/') ? (
-              <img
-                src={previewFile.previewUrl}
-                alt="Preview"
-                className="max-w-full max-h-[70vh] mx-auto"
-              />
-            ) : previewFile.type === 'application/pdf' ? (
-              <iframe
-                src={previewFile.previewUrl}
-                className="w-full h-[70vh]"
-                title={previewFile.name}
-              />
-            ) : (
-              <div className="p-4 bg-gray-100 rounded">
-                <p>Preview not available for this file type.</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  File type: {previewFile.type}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </>
   );
 };

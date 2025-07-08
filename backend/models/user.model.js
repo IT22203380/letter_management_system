@@ -29,8 +29,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.ENUM('active', 'inactive', 'suspended'),
       defaultValue: 'active',
       allowNull: false
-    }
-  });
+    },
+   
+    });
 
   return User;
 };

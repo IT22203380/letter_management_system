@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Letter } from '../types/letter';
 import { useTranslation } from 'react-i18next';
@@ -79,8 +78,8 @@ const DataEntryDashboard: React.FC = () => {
     pending: t('pending', 'Pending'),
     processing: t('processing', 'Processing'),
     completed: t('completed', 'Completed'),
-    normalPost: t('normalPost', 'Normal Post'),
-    registeredPost: t('registeredPost', 'Registered Post'),
+    normalPost: t('normalPost.title', 'Normal Post'), 
+    registeredPost: t('registeredPostForm.title', 'Registered Post'),
     fax: t('fax', 'Fax'),
     email: t('email', 'Email'),
     viewLetter: t('viewLetter', 'View Letter'),

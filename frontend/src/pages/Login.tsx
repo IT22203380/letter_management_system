@@ -3,7 +3,7 @@ import { LoginAssets } from "../assets/icons/login/login";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useAuth } from "../hooks/useAuth";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import Footer from "../components/layout/Footer";
 import LanguageButton from "../components/ui/buttons/LanguageButton";
 import Textbox from "../components/ui/textboxes/Textbox"
@@ -12,12 +12,12 @@ import Button from "../components/ui/buttons/Button";
 import axios from 'axios';
 
 console.log('Environment Variables:', import.meta.env);
-console.log('API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
+console.log('API_BASE_URL:', import.meta.env.VITE_BASE_URL);
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+const API_BASE_URL = import.meta.env.VITE_BASE_URL ;
 
 function Login() {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     const navigate = useNavigate();
     const [nic, setNIC] = useState('');
     const [password, setPassword] = useState('');
@@ -48,8 +48,8 @@ function Login() {
             return;
         }
         try {
-            console.log('Making request to:', `${API_BASE_URL}/api/users/login`); // Updated endpoint
-            const response = await axios.post(`${API_BASE_URL}/api/users/login`, { 
+            console.log('Making request to:', `${API_BASE_URL}/users/login`); 
+            const response = await axios.post(`${API_BASE_URL}/users/login`, { 
                 nic, 
                 password 
             }, {
@@ -117,16 +117,16 @@ function Login() {
                     </div>
 
                     <div className="mt-1 mb-3 w-full flex flex-col items-center justify-center">
-                        <h2 className="text-2xl font-semibold">{t('Welcome')}</h2>
+                        <h2 className="text-2xl font-semibold">Welcome</h2>
                     </div>
 
                     <div className="mt-1 flex w-full flex-col items-center justify-center">
-                        <h5 className="text-xl font-medium text-white">{t('Letter Management System')}</h5>
+                        <h5 className="text-xl font-medium text-white">Letter Management System</h5>
                     </div>
 
                     {/* System variant: e.g., Internal or External */}
                     <div className="absolute bottom-3 w-full flex flex-col items-center justify-center">
-                        <h5 className="text-xs font-medium text-white">{t('Internal System')}</h5>
+                        <h5 className="text-xs font-medium text-white">Internal System</h5>
                     </div>
 
                 </div>
@@ -140,9 +140,9 @@ function Login() {
                             fontWeight: '700',
                             color: '#494848'
                         }}>
-                        {t('Login')}
+                        Login
                     </h2>
-                    <p className="text-gray-500 text-center text-sm mt-1 mb-7">{t('Login to your account')}</p>
+                    <p className="text-gray-500 text-center text-sm mt-1 mb-7">Login to your account</p>
 
                     <form onSubmit={onSubmitHandler} className="space-y-4"
                         onReset={() => {
@@ -155,7 +155,7 @@ function Login() {
                         <div className="space-y-1">
                             <Textbox 
                                 iconName="AccountCircle" 
-                                placeholder={t('Enter NIC Number')} 
+                                placeholder="Enter NIC Number" 
                                 value={nic} 
                                 onChange={handleChange} 
                                 min={5} 
@@ -163,7 +163,7 @@ function Login() {
                                 required={true} 
                                 className="w-full"
                             />
-                            {error && <ErrorMessage message={t(error)} />}
+                            {error && <ErrorMessage message={error} />}
                         </div>
 
                         {/* Password */}
@@ -171,7 +171,7 @@ function Login() {
                             <Textbox 
                                 iconName="Lock" 
                                 type="password" 
-                                placeholder={t('Enter Password')} 
+                                placeholder="Enter Password" 
                                 value={password} 
                                 onChange={e => setPassword(e.target.value)} 
                                 min={5} 
@@ -183,7 +183,7 @@ function Login() {
 
                         <div className="pt-2">
                             <Button 
-                                buttonText={t('Login')} 
+                                buttonText= "Login" 
                                 buttonStyle={2} 
                                 className="w-full h-10" 
                                 buttonType="submit" 

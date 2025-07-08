@@ -52,10 +52,10 @@ const timezoned = () =>
 
 // Reusable format functions
 const consoleFormat = format.combine(
-  format.colorize({ all: true }),
   format.timestamp({ format: timezoned }),
-  format.printf(({ level, message, timestamp }) => {
-    return `[${timestamp}] ${level}: ${message}`;
+  format.printf(({ level, message, timestamp, ...meta }) => {
+    const metaString = Object.keys(meta).length ? ` ${JSON.stringify(meta)}` : '';
+    return `${timestamp} [${level}]: ${message}${metaString}`;
   })
 );
 
@@ -66,25 +66,23 @@ const fileFormat = format.combine(
 
 // System Logger
 const systemLogger = createLogger({
-  levels: customLevels.levels,
+  level: 'info',
+  format: format.combine(
+    format.splat(),
+    format.json()
+  ),
   transports: [
-    // Console - shows all levels
     new transports.Console({
-      format: consoleFormat,
+      format: consoleFormat
     }),
-    // Info log file - only info messages
     new transports.File({
-      level: "info",
-      filename: path.join(systemLogDir, "info.log"),
-      format: format.combine(filterOnly("info"), fileFormat),
-    }),
-    // Error log file - only error messages
-    new transports.File({
-      level: "error",
-      filename: path.join(systemLogDir, "error.log"),
-      format: format.combine(filterOnly("error"), fileFormat),
-    }),
-  ],
+      filename: path.join(systemLogDir, 'system.log'),
+      format: format.combine(
+        format.timestamp({ format: timezoned }),
+        format.json()
+      )
+    })
+  ]
 });
 
 // Activity Logger

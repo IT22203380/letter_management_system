@@ -19,17 +19,18 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: '*',  // Temporarily allow all origins
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range', 'Set-Cookie'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 }));
 
 app.use(cookieParser());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-
 
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -40,7 +41,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// API Routes
+// Routes without /api prefix
 app.use('/users', userRoutes);
 app.use('/letters', letterRoutes);
 app.use('/faxes', faxRoutes);
@@ -132,7 +133,6 @@ sequelize.sync({ alter: true })
       console.log(` Server running on port ${PORT}`);
       console.log(` Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log('Database connected & synced');
-      //console.log(`Static files served from: /uploads`);
     });
   })
   .catch(err => {

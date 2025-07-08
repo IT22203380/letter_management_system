@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import {FaFilePdf, FaFileImage, FaFileAlt, FaTimes, FaFileWord } from 'react-icons/fa';
-import { FiUpload, FiSend, FiEye } from 'react-icons/fi';
+import { FaFilePdf, FaFileImage, FaFileAlt, FaTimes, FaFileWord, FaTimesCircle } from 'react-icons/fa';
+import { FiUpload, FiSend, FiEye, FiDownload } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 
@@ -244,8 +244,8 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
           receiverAddress: '',
           date: new Date().toISOString().split('T')[0],
           time: new Date().toTimeString().substring(0, 5),
-          isConfidential: 'No',
-          mode: 'By hand',
+          isConfidential: 'no',
+          mode: 'byHand',
           status: 'pending',
           priority: 'medium',
           type: 'registered',
@@ -297,6 +297,84 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
     if (type === 'application/pdf') return <FaFilePdf className="text-red-500 text-xl" />;
     if (type.includes('word') || type.includes('document')) return <FaFileWord className="text-blue-600 text-xl" />;
     return <FaFileAlt className="text-gray-500 text-xl" />;
+  };
+
+  // Add state for the selected attachment
+  const [selectedAttachment, setSelectedAttachment] = useState<{
+    url: string;
+    name: string;
+    type: string;
+  } | null>(null);
+
+  // Function to handle attachment click
+  const handleAttachmentClick = (file: UploadedFile, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (!file.url) return;
+    
+    // Remove any leading slashes from the URL to prevent double slashes
+    const cleanUrl = file.url.startsWith('/') ? file.url.substring(1) : file.url;
+    
+    // Construct the full URL without adding /api
+    const baseUrl = import.meta.env.VITE_BASE_URL || '';
+    const fullUrl = `${baseUrl}${baseUrl.endsWith('/') ? '' : '/'}${cleanUrl}`;
+    
+    console.log('Opening attachment URL:', fullUrl); // For debugging
+    
+    setSelectedAttachment({
+      url: fullUrl,
+      name: file.name || 'Attachment',
+      type: file.type || 'application/octet-stream'
+    });
+  };
+
+  // Function to render the attachment preview based on type
+  const renderAttachmentPreview = () => {
+    if (!selectedAttachment) return null;
+
+    const { url, name, type } = selectedAttachment;
+    
+    if (type.startsWith('image/')) {
+      return (
+        <div className="max-h-[80vh] overflow-auto">
+          <img 
+            src={url} 
+            alt={name} 
+            className="max-w-full h-auto mx-auto"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/placeholder-image.png';
+            }}
+          />
+        </div>
+      );
+    } else if (type === 'application/pdf') {
+      return (
+        <div className="w-full h-[80vh]">
+          <iframe 
+            src={`${url}#view=fitH`} 
+            className="w-full h-full border-0"
+            title={name}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex flex-col items-center justify-center p-8">
+          <FaFileAlt className="h-16 w-16 text-gray-400 mb-4" />
+          <p className="text-gray-600 mb-4">Preview not available for this file type</p>
+          <a
+            href={url}
+            download={name}
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <FiDownload className="mr-2 h-4 w-4" />
+            Download File
+          </a>
+        </div>
+      );
+    }
   };
 
   return (
@@ -402,7 +480,7 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('registeredPostForm.date')}
+            {t('date')}
             </label>
             <input
               type="date"
@@ -415,7 +493,7 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-            {t('registeredPostForm.time')}
+            {t('time')}
             </label>
             <input
               type="time"
@@ -430,66 +508,64 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
 
         {/* Additional Information */}
         <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">
-          {t('registeredPostForm.additionalInformation')}
-          </h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-4">Additional Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('registeredPostForm.isConfidential')}
-              </label>
-              <div className="flex space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="isConfidential"
-                    value="Yes"
-                    checked={formData.isConfidential === 'Yes'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Yes
+                  {t('common.isConfidential')}
                 </label>
+                <div className="flex space-x-4">
                 <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="isConfidential"
-                    value="No"
-                    checked={formData.isConfidential === 'No'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  No
-                </label>
+                    <input
+                      type="radio"
+                      name="isConfidential"
+                      value="Yes"
+                      checked={formData.isConfidential === 'yes'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.yes')}
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="isConfidential"
+                      value="No"
+                      checked={formData.isConfidential !== 'no'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.no')}
+                  </label>
               </div>
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-              {t('registeredPostForm.mode')}
-              </label>
-              <div className="flex space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="mode"
-                    value="By hand"
-                    checked={formData.mode === 'By hand'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  By hand
+                  {t('common.mode')}
                 </label>
+                <div className="flex space-x-4">
+                 <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="mode"
+                      value="By hand"
+                      checked={formData.mode === 'byHand'}
+                      onChange={handleChange}
+                      className="mr-2"
+                    />
+                    {t('common.byHand')}
+                  </label>
                 <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="mode"
-                    value="Postal"
-                    checked={formData.mode === 'Postal'}
-                    onChange={handleChange}
-                    className="mr-2"
-                  />
-                  Postal
-                </label>
+                    <input
+                      type="radio"
+                      name="mode"
+                      value="postal"
+                      checked={formData.mode === 'postal'}
+                      onChange={handleChange}
+                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300"
+                    />
+                    <span className="ml-2 text-gray-700">{t('postal')}</span>
+                  </label>
               </div>
             </div>
           </div>
@@ -498,12 +574,12 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
         {/* File Upload Section */}
         <div className="bg-gray-50 p-4 rounded-lg">
           <h3 className="text-lg font-semibold text-gray-800 mb-4">
-          {t('registeredPostForm.attachments')}
+          {t('attachments')}
           </h3>
           <div className="flex space-x-4">
             <label className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-50">
               <FiUpload className="mr-2" />
-             {t('registeredPostForm.uploadFile')}
+             {t('uploadFile')}
               <input 
                 type="file" 
                 multiple 
@@ -527,7 +603,7 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
           {attachments.length > 0 && (
             <div className="mt-4">
               <h4 className="text-sm font-medium text-gray-700 mb-2">
-              {t('registeredPostForm.attachedFiles')}
+              {t('attachedFiles')}
               </h4>
               <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
                 {attachments.map((file) => (
@@ -667,6 +743,9 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Status
                     </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Attachments
+                    </th>
                   </tr>
                 </thead>
                 {/* Table Body */}
@@ -693,26 +772,15 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="flex items-start space-x-4">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center">
-                              <span className="text-xs font-medium text-gray-500 mr-2">From:</span>
-                              <div className="truncate">
-                                <p className="text-sm font-medium text-gray-900 truncate">{entry.senderName}</p>
-                                {entry.senderAddress && (
-                                  <p className="text-xs text-gray-500 truncate">{entry.senderAddress}</p>
-                                )}
-                              </div>
-                            </div>
-                            <div className="mt-1 flex items-center">
-                              <span className="text-xs font-medium text-gray-500 mr-2">To:</span>
-                              <div className="truncate">
-                                <p className="text-sm font-medium text-gray-900 truncate">{entry.receiverName}</p>
-                                {entry.receiverAddress && (
-                                  <p className="text-xs text-gray-500 truncate">{entry.receiverAddress}</p>
-                                )}
-                              </div>
-                            </div>
+                        <div className="flex items-center">
+                          <div className="text-sm font-medium text-gray-900 truncate max-w-[120px]" title={entry.senderName}>
+                            {entry.senderName}
+                          </div>
+                          <svg className="h-4 w-4 mx-2 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                          <div className="text-sm font-medium text-gray-900 truncate max-w-[120px]" title={entry.receiverName}>
+                            {entry.receiverName}
                           </div>
                         </div>
                       </td>
@@ -729,6 +797,50 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
                         <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusBadgeClass(entry.status)}`}>
                           {entry.status || 'Pending'}
                         </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {entry.attachments && entry.attachments.length > 0 ? (
+                          <div className="flex flex-wrap gap-1">
+                            {entry.attachments.map((file, index) => {
+                              // Skip if file is null or undefined
+                              if (!file) return null;
+                              
+                              // Get file extension for fallback icon
+                              const fileExt = file.name ? file.name.split('.').pop()?.toLowerCase() : '';
+                              const fileUrl = file.url || '';
+                              const fileName = file.name || 'Unnamed file';
+                              
+                              return (
+                                <a 
+                                  key={index}
+                                  href={fileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                  onClick={(e) => handleAttachmentClick(file, e)}
+                                  title={`Click to view ${fileName}`}
+                                >
+                                  {file.type?.startsWith('image/') ? (
+                                    <FaFileImage className="h-3 w-3 mr-1 text-blue-500" />
+                                  ) : file.type === 'application/pdf' || fileExt === 'pdf' ? (
+                                    <FaFilePdf className="h-3 w-3 mr-1 text-red-500" />
+                                  ) : file.type?.startsWith('text/') || 
+                                    file.type?.includes('document') || 
+                                    (fileExt && ['doc', 'docx', 'txt'].includes(fileExt)) ? (
+                                    <FaFileWord className="h-3 w-3 mr-1 text-blue-600" />
+                                  ) : (
+                                    <FaFileAlt className="h-3 w-3 mr-1 text-gray-500" />
+                                  )}
+                                  <span className="truncate max-w-xs">
+                                    {fileName.length > 15 ? `${fileName.substring(0, 12)}...` : fileName}
+                                  </span>
+                                </a>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <span className="text-xs text-gray-400">No attachments</span>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -790,6 +902,58 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
         )}
       </div>
 
+      {/* Attachment Preview Modal */}
+      {selectedAttachment && (
+        <div className="fixed inset-0 z-50 overflow-y-auto" onClick={() => setSelectedAttachment(null)}>
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div 
+              className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    {selectedAttachment.name}
+                  </h3>
+                  <button
+                    type="button"
+                    className="text-gray-400 hover:text-gray-500"
+                    onClick={() => setSelectedAttachment(null)}
+                  >
+                    <FaTimesCircle className="h-6 w-6" />
+                  </button>
+                </div>
+                <div className="mt-2">
+                  {renderAttachmentPreview()}
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <a
+                  href={selectedAttachment.url}
+                  download={selectedAttachment.name}
+                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <FiDownload className="mr-2 h-4 w-4" />
+                  Download
+                </a>
+                <button
+                  type="button"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  onClick={() => setSelectedAttachment(null)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* File Preview Modal */}
       {showPreview && previewFile && (
         <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4" onClick={() => setShowPreview(false)}>
@@ -817,7 +981,9 @@ const RegisteredPostForm: React.FC<RegisteredPostFormProps> = ({ initialData, on
                   <p className="mt-2 text-sm text-gray-500">
                     {previewFile.name} • {formatFileSize(previewFile.size)}
                   </p>
-                  <a href={previewFile.previewUrl}target="_blank"
+                  <a
+                    href={previewFile.previewUrl}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     onClick={e => e.stopPropagation()}

@@ -3,12 +3,13 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react';
 interface User {
     username: string;
     role: 'dataEntry' | 'ao';
+    nic: string;
 }
 
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
-    login: (username: string, role: 'dataEntry' | 'ao') => void;
+    login: (userData: { username: string; role: string; nic: string }) => void;
     logout: () => void;
 }
 
@@ -28,7 +29,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (savedUser) {
             try {
                 const userData = JSON.parse(savedUser);
-                setUser(userData);
+                // Map role from backend format to frontend format
+                const mappedUser = {
+                    ...userData,
+                    role: userData.role === 'admin' ? 'ao' : 'dataEntry'
+                };
+                setUser(mappedUser);
                 setIsAuthenticated(true);
             } catch (error) {
                 console.error('Failed to parse user data', error);
@@ -37,11 +43,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, []);
 
-    const login = (username: string, role: 'dataEntry' | 'ao') => {
-        const userData = { username, role };
-        setUser(userData);
+    const login = (userData: { username: string; role: string; nic: string }) => {
+        // Map role from backend format to frontend format
+        const mappedUser = {
+            username: userData.username,
+            nic: userData.nic,
+            role: userData.role === 'admin' ? 'ao' : 'dataEntry'
+        };
+        setUser(mappedUser);
         setIsAuthenticated(true);
-        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('user', JSON.stringify(mappedUser));
     };
 
     const logout = () => {
