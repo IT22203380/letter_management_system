@@ -1,10 +1,20 @@
 {
-  
   "welcome": "Welcome",
   "dashboard": "Dashboard",
   "dataEntry": "Data Entry",
   "electionCommission": "Election Commission of Sri Lanka",
-  "login": "Login",
+  "login": {
+    "title": "Login to your account",
+    "subtitle": "Enter your credentials to access your account",
+    "banner": {
+      "electionCommissionSi": "මැතිවරණ කොමිෂන් සභාව",
+      "electionCommissionTa": "தேர்தல் ஆணைக்குழு",
+      "electionCommissionEn": "Election Commission",
+      "welcome": "Welcome",
+      "systemName": "Letter Management System",
+      "systemVariant": "Internal System"
+    }
+  },
   "loginToYourAccount": "Login to your account",
   "email": "Email",
   "password": "Password",
@@ -80,8 +90,8 @@
     "pending": "Pending",
     "downloadFile": "Download File"
   },
-    "completed": "Completed",
-    "normalPost": {
+  "completed": "Completed",
+  "normalPost": {
     "title": "Normal Post",
     "senderInfo": "Sender Information",
     "senderName": "Sender Name",
@@ -181,5 +191,12 @@
     "saved": "Saved",
     "error": "Error",
     "success": "Success"
+  },
+  "Login": {
+      "title": "Login",
+      "subtitle": "Login to your account",
+      "nic": "Enter NIC Number",
+      "password": "Enter Password",
+      "button": "Login"
   }
 }

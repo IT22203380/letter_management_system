@@ -3,7 +3,18 @@
   "dashboard": "டாஷ்போர்டு",
   "dataEntry": "தரவு உள்ளீடு",
   "electionCommission": "இலங்கை தேர்தல் ஆணைக்குழு",
-  "login": "உள்நுழைக",
+  "login": {
+    "title": "உங்கள் கணக்கில் உள்நுழையவும்",
+    "subtitle": "உங்கள் கணக்கை அணுக உங்கள் சான்றுகளை உள்ளிடவும்",
+    "banner": {
+      "electionCommissionSi": "මැතිවරණ කොමිෂන් සභාව",
+      "electionCommissionTa": "தேர்தல் ஆணைக்குழு",
+      "electionCommissionEn": "Election Commission",
+      "welcome": "வரவேற்கிறோம்",
+      "systemName": "கடித மேலாண்மை அமைப்பு",
+      "systemVariant": "உள் அமைப்பு"
+    }
+  },
   "loginToYourAccount": "உங்கள் கணக்கில் உள்நுழையவும்",
   "email": "மின்னஞ்சல்",
   "password": "கடவுச்சொல்",
@@ -227,5 +238,13 @@
     "uploadFile": "கோப்பை பதிவேற்று",
     "previewNotAvailable": "இந்த கோப்பு வகைக்கு முன்னோட்டம் இல்லை",
     "downloadFile": "கோப்பைப் பதிவிறக்கு"
+  },
+  
+   "Login": {
+      "title": "உள்நுழைய",
+      "subtitle": "உங்கள் கணக்கில் உள்நுழையவும்",
+      "nic": "தே.அ.எண் உள்ளிடவும்",
+      "password": "கடவுச்சொல்லை உள்ளிடவும்",
+      "button": "உள்நுழைய"
   }
 }

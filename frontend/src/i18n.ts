@@ -7,31 +7,44 @@ import enTranslation from './locales/en/translation.json';
 import siTranslation from './locales/si/translation.json';
 import taTranslation from './locales/ta/translation.json';
 
-const resources = {
-  en: {
-    translation: enTranslation
-  },
-  si: {
-    translation: siTranslation
-  },
-  ta: {
-    translation: taTranslation
+// Type declaration for TypeScript
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    defaultNS: 'translation';
+    resources: {
+      translation: typeof enTranslation;
+    };
   }
-} as const;
+}
+
+// the translations
+const resources = {
+  en: {translation: enTranslation},
+  si: {translation: siTranslation},
+  ta: {translation: taTranslation}
+};
 
 i18n
-  .use(LanguageDetector) // Detect user language
-  .use(initReactI18next) // Pass the i18n instance to react-i18next
+  .use(LanguageDetector)
+  .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'en', // Default language
+    fallbackLng: 'en',
+    debug: process.env.NODE_ENV === 'development',
     interpolation: {
-      escapeValue: false, // React already escapes values
+      escapeValue: false,
     },
     detection: {
       order: ['localStorage', 'navigator'],
-      caches: ['localStorage']
+      lookupLocalStorage: 'i18nextLng',
+      caches: ['localStorage'],
+    },
+    react: {
+      useSuspense: false
     }
+  })
+  .catch((error) => {
+    console.error('i18n initialization failed', error);
   });
 
 export default i18n;

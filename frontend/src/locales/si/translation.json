@@ -3,7 +3,18 @@
   "dashboard": "පාලක පුවරුව",
   "dataEntry": "දත්ත ඇතුලත් කිරීම",
   "electionCommission": "ශ්‍රී ලංකා මැතිවරණ කොමිෂන් සභාව",
-  "login": "ඇතුල් වන්න",
+  "login": {
+    "title": "ඔබගේ ගිණුමට පිවිසෙන්න",
+    "subtitle": "ඔබගේ ගිණුමට පිවිසීමට ඔබගේ අක්තපත්‍ර ඇතුළත් කරන්න",
+    "banner": {
+      "electionCommissionSi": "මැතිවරණ කොමිෂන් සභාව",
+      "electionCommissionTa": "தேர்தல் ஆணைக்குழு",
+      "electionCommissionEn": "Election Commission",
+      "welcome": "සාදරයෙන් පිළිගනිමු",
+      "systemName": "ලිපි කළමනාකරණ පද්ධතිය",
+      "systemVariant": "අභ්‍යන්තර පද්ධතිය"
+    }
+  },
   "loginToYourAccount": "ඔබේ ගිණුමට ඇතුල් වන්න",
   "email": "විද්‍යුත් තැපෑල",
   "password": "මුරපදය",
@@ -46,6 +57,7 @@
     "getStarted": "නව සාමාන්‍ය තැපෑලක් සෑදීමෙන් ආරම්භ කරන්න",
     "dateTime": "දිනය සහ වේලාව",
     "uploadFile": "ගොනුව උඩුගත කරන්න",
+    "scanDocument": "ලේඛනය ස්කෑන් කරන්න",
     "senderToReceiver": "යවන්නා → ලබන්නා",
     "noAttachments": "ඇමුණුම් නැත",
     "confidential": "රහස්‍යයි",
@@ -220,5 +232,12 @@
   "download": "බාගන්න",
   "pending": "පොරොත්තුවෙන්",
   "downloadFile": "ගොනුව බාගන්න"
-  }
+  },
+  "Login": {
+      "title": "පිවිසෙන්න",
+      "subtitle": "ඔබගේ ගිණුමට පිවිසෙන්න",
+      "nic": "ජා.හැඳු.ප. අංකය ඇතුළත් කරන්න",
+      "password": "මුරපදය ඇතුළත් කරන්න",
+      "button": "පිවිසෙන්න"
+    }
 }
